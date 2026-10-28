@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101c22">
+  <title>Kvído · simulátor</title>
+  <link rel="stylesheet" href="./static/simulator.css">
+</head>
+<body>
+  <section id="loginScreen" class="login-screen">
+    <form id="loginForm" class="login-card">
+      <div class="brand-mark large" aria-hidden="true">K<span>↗</span></div>
+      <p class="eyebrow">KVÍDO / VIRTUÁLNÍ GARÁŽ</p>
+      <h1>Nejdřív si to<br>vyzkoušíme.</h1>
+      <p class="login-copy">Řiď malé auto, prozkoumej místnost a sleduj, jak AI zvládá skutečný úkol ve virtuálním světě.</p>
+      <div class="simulation-label"><span class="status-dot"></span> SIMULÁTOR · ŽÁDNÉ SKUTEČNÉ AUTO</div>
+      <label for="accessKey">Přístupový klíč simulátoru</label>
+      <input id="accessKey" type="password" autocomplete="current-password" required placeholder="Zadej svůj klíč">
+      <button class="primary login-submit" type="submit">Vstoupit do kokpitu <span>↗</span></button>
+      <p id="loginError" class="error-note" role="alert"></p>
+      <p class="login-footnote">Lokální simulace. Řízení se aktivuje až tvým pokynem.</p>
+    </form>
+    <div class="login-grid" aria-hidden="true"><div class="floor-grid"></div><div class="abstract-door"></div><div class="abstract-box"></div><span class="login-coordinate">TESTOVACÍ PROSTŘEDÍ / 01</span></div>
+  </section>
+
+  <main id="cockpit" class="cockpit" hidden>
+    <div class="camera-scene">
+      <img id="camera" alt="Pohled z přední kamery virtuálního auta" draggable="false">
+      <div class="camera-shade"></div>
+      <div id="cameraPlaceholder" class="camera-placeholder"><span class="loading-ring"></span><p>Připravuji virtuální kameru…</p></div>
+    </div>
+    <header class="topbar">
+      <a class="brand" href="" aria-label="Kvído simulátor"><span class="brand-mark">K<span>↗</span></span><span>Kvído <small>SIM LAB</small></span></a>
+      <div class="simulation-label"><span class="status-dot"></span> SIMULÁTOR <span class="simulation-extra">· ŽÁDNÉ SKUTEČNÉ AUTO</span></div>
+      <div class="topbar-actions">
+        <button id="missionToggle" class="icon-button mobile-only" title="Zobrazit nebo skrýt úkol" aria-label="Zobrazit nebo skrýt úkol">☷</button>
+        <button id="settingsButton" class="icon-button" title="Nastavení simulace a ovládání" aria-label="Nastavení">⚙</button>
+        <button id="fullscreenButton" class="icon-button" title="Přepnout celou obrazovku" aria-label="Celá obrazovka">⛶</button>
+        <button id="stopButton" class="emergency" title="Okamžitě zastavit pohyb, pozastavit AI a vypnout řízení">■ <span>STOP</span><kbd>Esc</kbd></button>
+      </div>
+    </header>
+
+    <aside id="missionPanel" class="mission-panel glass">
+      <div class="panel-heading"><p class="eyebrow">01 / VÝPRAVA</p><span id="taskBadge" class="badge">Připraveno</span></div>
+      <h1>Kam pojedeme?</h1>
+      <p class="panel-intro">Dej Kvídovi cíl. Každý pohyb naplánuje z obrazu a potom ověří výsledek.</p>
+      <form id="taskForm">
+        <label class="sr-only" for="goal">Cíl pro AI</label>
+        <textarea id="goal" rows="3" maxlength="1000">Dojeď ke dveřím a zastav před prahem.</textarea>
+        <div class="quick-tasks" aria-label="Předpřipravené cíle"><button type="button" data-goal="Dojeď ke dveřím a zastav před prahem.">↗ Ke dveřím</button><button type="button" data-goal="Rozhlédni se a popiš překážky. Zůstaň stát.">◎ Rozhlédnout</button></div>
+        <button id="startTask" class="primary start-task" type="submit"><span>▶</span> Spustit AI výpravu</button>
+      </form>
+      <div class="task-actions"><button id="pauseTask" title="Pozastavit aktuální úkol">Ⅱ Pauza</button><button id="resumeTask" title="Znovu aktivovat řízení a pokračovat v úkolu">▷ Pokračovat</button><button id="cancelTask" class="icon-button" title="Zrušit úkol" aria-label="Zrušit úkol">×</button></div>
+      <div class="thinking-block"><div class="thinking-title"><span id="thinkingDot" class="thinking-dot"></span><strong id="taskPhase">Čekám na tvůj cíl</strong><span id="stepCount">00</span></div><p id="taskReason">Můžeš řídit ručně nebo spustit první AI výpravu.</p><div id="navigationMemory" class="navigation-memory" hidden><div class="navigation-memory-heading"><strong>Průzkumná paměť</strong><span id="navigationPhase"></span></div><div id="navigationScan" class="navigation-scan"></div><p id="navigationReason"></p></div><span id="provider" class="provider">AI zatím neaktivní</span></div>
+      <div class="log-heading"><div class="record-tabs"><button id="taskLogTab" type="button" class="selected" aria-pressed="true">Deník</button><button id="routeMemoryTab" type="button" aria-pressed="false" title="Pozorované cesty z kamery" hidden>Cesty</button><button id="aiMapTab" type="button" aria-pressed="false" hidden>Mapa AI</button></div><span id="logCount">0 KROKŮ</span></div>
+      <ol id="taskLog" class="task-log"><li class="empty-log"><span>↳</span><p>První pozorování se objeví po spuštění úkolu.</p></li></ol>
+      <section id="routeMemoryPanel" class="route-memory-panel" aria-label="Pozorované cesty" hidden><p class="route-memory-legend">Odhady z kamery, ne přesná mapa</p><ol id="routeMemoryList" class="route-memory-list"></ol></section>
+      <section id="aiMapPanel" class="ai-map-panel" aria-label="Mapa hypotéz AI o místech a průchodech" hidden><p class="route-memory-legend">Odhady z kamery · spojení hypotéz, ne skutečná geometrie</p><div class="ai-map-scroll"><p id="aiMapCurrentPlace" class="ai-map-current"></p><p id="aiMapAlternative" class="ai-map-alternative" hidden></p><p class="ai-map-subheading">MÍSTA V PAMĚTI</p><ul id="aiMapPlaces" class="ai-map-places"></ul><p class="ai-map-subheading">POZOROVANÉ SPOJE</p><ol id="aiMapEdges" class="ai-map-edges"></ol></div></section>
+    </aside>
+
+    <div class="camera-hud" aria-hidden="true"><div class="camera-label"><span class="record-dot"></span> PŘEDNÍ KAMERA <span id="frameRate">SIM / LIVE</span></div><div class="reticle"><i></i><i></i><i></i><i></i><span>+</span></div><div class="camera-caption"><span id="driveCaption">PŘIPRAVENO K PRŮZKUMU</span><span id="headingLabel">000°</span></div></div>
+
+    <aside class="world-panel">
+      <section id="mapPanel" class="map-panel glass">
+        <div class="panel-heading"><p class="eyebrow">02 / MAPA SVĚTA</p><button id="expandMap" class="map-expand" title="Zvětšit mapu a zobrazit průjezd checkpointů" aria-label="Zvětšit mapu">⛶</button></div>
+        <p id="scenarioSummary" class="scenario-summary">Virtuální místnost pro samostatný průzkum.</p>
+        <canvas id="minimap" width="480" height="330" role="img" aria-label="Mapa místnosti, skutečná poloha simulovaného auta, jeho trasa a cíl"></canvas>
+        <div id="checkpointProgress" class="checkpoint-progress" hidden><span>Checkpointy</span><strong id="checkpointCount">0 / 0</strong><progress id="checkpointBar" value="0" max="1" aria-label="Projeté checkpointy"></progress></div>
+        <div class="map-legend"><span><i class="legend-car"></i> Auto</span><span><i class="legend-door"></i> Dveře</span><span><i class="legend-path"></i> Trasa</span></div>
+      </section>
+      <section class="truth-panel glass">
+        <div class="panel-heading"><p class="eyebrow">MĚŘENÍ SIMULÁTORU</p><span title="Tato čísla počítá simulátor. Nejde o odhad AI." class="info-tag">i</span></div>
+        <div class="distance-metric"><strong id="sensorDistance">—</strong><span>cm<br>před autem</span></div>
+        <div class="truth-line"><span>Dveře vzdušnou čarou</span><strong id="doorDistance">—</strong></div>
+        <div class="truth-line"><span>Skutečně ujeto</span><strong id="travelledDistance">0,00 m</strong></div>
+        <div class="truth-line"><span>Kolize</span><strong id="collisionCount">0</strong></div>
+        <div class="truth-line"><span>Cíl podle simulátoru</span><strong id="goalReached">Zatím ne</strong></div>
+        <p class="truth-note">Přesná data světa · oddělená od úsudku AI</p>
+      </section>
+    </aside>
+
+    <div class="bottom-console">
+      <section class="drive-panel glass">
+        <div class="drive-topline"><div class="mode-switch" aria-label="Režim řízení"><button id="manualMode" class="selected" title="Přepnout na ruční řízení; AI se pozastaví">Ručně</button><button id="aiMode" title="Přepnout na AI režim; pohyb začne až spuštěním výpravy">AI pilot</button></div><button id="armButton" class="arm-button" title="Aktivovat ruční ovládání virtuálního auta">○ Aktivovat řízení</button></div>
+        <div class="drive-controls"><div id="joystick" class="joystick" role="group" aria-label="Dotykový joystick, drž a táhni pro řízení" title="Drž a táhni: vpřed, vzad, otočení"><span class="joystick-axis axis-x"></span><span class="joystick-axis axis-y"></span><span id="joystickKnob" class="joystick-knob">✥</span></div><div class="keypad" aria-label="Směrové ovládání"><button data-drive="left" class="key-strafe-left" title="Drž pro posun do strany vlevo · Q">⇤<small>Q</small></button><button data-drive="right" class="key-strafe-right" title="Drž pro posun do strany vpravo · E">⇥<small>E</small></button><button data-drive="forward" class="key-up" title="Drž pro jízdu vpřed · W nebo šipka nahoru">↑<small>W</small></button><button data-drive="rotate_left" class="key-left" title="Drž pro otočení vlevo · A nebo šipka vlevo">↶<small>A</small></button><button data-drive="backward" class="key-down" title="Drž pro jízdu vzad · S nebo šipka dolů">↓<small>S</small></button><button data-drive="rotate_right" class="key-right" title="Drž pro otočení vpravo · D nebo šipka vpravo">↷<small>D</small></button></div><div class="drive-help"><strong id="controlState">Řízení vypnuté</strong><p>Drž směr pro pohyb.<br>Puštění = zastavení.</p><span><kbd>Mezerník</kbd> zastavit</span></div></div>
+      </section>
+      <section class="comparison-panel glass"><div class="panel-heading"><p class="eyebrow">03 / OVĚŘENÍ POSLEDNÍHO KROKU</p><span id="comparisonStep">ČEKÁM NA KROK</span></div><div class="comparison-body"><button id="beforeButton" class="frame-button" title="Zvětšit snímek před poslední akcí"><span>PŘED</span><img id="beforeFrame" alt="Kamera před posledním krokem AI"><i>◎</i></button><span class="comparison-arrow">→</span><button id="afterButton" class="frame-button" title="Zvětšit snímek po poslední akci"><span>PO</span><img id="afterFrame" alt="Kamera po posledním kroku AI"><i>◎</i></button><div class="assessment"><strong id="actionLabel">Pozorovat → jednat → ověřit</strong><p id="assessmentText">AI srovná oba pohledy a vysvětlí, co se změnilo.</p></div></div></section>
+    </div>
+
+    <footer class="statusbar"><span><i id="connectionDot"></i><span id="connectionText">Připojuji simulátor</span></span><span id="scenarioLabel">VIRTUÁLNÍ MÍSTNOST</span><span>LOKÁLNÍ TEST <span class="status-divider">/</span> ŽÁDNÝ HARDWARE</span></footer>
+  </main>
+
+  <dialog id="settingsDialog" class="settings-dialog"><div class="dialog-heading"><div><p class="eyebrow">TVŮJ TESTOVACÍ SVĚT</p><h2>Nastavení simulace</h2></div><button class="icon-button" data-close="settingsDialog" aria-label="Zavřít nastavení">×</button></div><section class="ai-model-settings" aria-labelledby="aiSettingsTitle"><p class="eyebrow" id="aiSettingsTitle">AI PILOT / MODEL</p><label for="aiProvider">AI poskytovatel</label><select id="aiProvider"><option value="openai">OpenAI</option><option value="gemma">Gemma</option></select><label for="aiModel">Model OpenAI</label><select id="aiModel"><option value="gpt-6-luna">gpt-6-luna</option><option value="gpt-6.1-sol">gpt-6.1-sol</option></select><p class="field-note">Sol 6.1 používá minimálně low reasoning; testy využívají uložený API klíč.</p><button id="saveAiSettings" class="primary save-ai-settings" type="button" disabled>Uložit AI nastavení</button><p id="aiSettingsNote" class="ai-settings-note" role="status">Načítám aktuální volbu…</p><p id="aiSettingsLock" class="ai-settings-lock" hidden>Pro změnu modelu nejdřív pozastav AI výpravu.</p></section><div class="settings-divider"></div><label for="scenario">Scénář</label><select id="scenario" aria-describedby="scenarioDescription"><option value="">Načítám scénáře…</option></select><p id="scenarioDescription" class="scenario-preview"></p><label for="seed">Číslo testu</label><input id="seed" type="number" value="1" min="0" max="1000000" step="1"><button id="resetButton" class="reset-button" title="Pozastavit AI, zastavit auto a obnovit vybraný scénář">↻ Obnovit svět a pozici auta</button><div class="settings-divider"></div><label for="speed">Rychlost ručního řízení <output id="speedValue">120 / 180</output></label><input id="speed" type="range" min="60" max="180" value="120" step="10"><label for="tilt">Náklon kamery <output id="tiltValue">90°</output></label><input id="tilt" type="range" min="35" max="145" value="90" step="5"><p class="field-note">Náklon lze měnit při aktivním ručním řízení.</p><button id="lightButton" class="reset-button" title="Přepnout světlo virtuálního auta při aktivním ručním řízení">☼ Rozsvítit světlo</button><label class="check-label"><input id="showMap" type="checkbox" checked> Zobrazit mapu světa</label><label class="check-label"><input id="showPath" type="checkbox" checked> Vykreslit projetou trasu</label><p class="settings-note">Simulovaný svět se vykresluje na tomto serveru. AI používá poskytovatele zobrazeného v kokpitu.</p></dialog>
+  <dialog id="frameDialog" class="frame-dialog"><div class="dialog-heading"><h2 id="frameTitle">Snímek kroku</h2><button class="icon-button" data-close="frameDialog" aria-label="Zavřít snímek">×</button></div><img id="expandedFrame" alt="Zvětšený snímek posledního kroku AI"></dialog>
+  <dialog id="mapDialog" class="map-dialog"><div class="dialog-heading"><div><p class="eyebrow">PŘEHLED PRO TEBE</p><h2 id="mapTitle">Mapa světa</h2></div><button class="icon-button" data-close="mapDialog" aria-label="Zavřít mapu">×</button></div><canvas id="expandedMap" width="960" height="660" role="img" aria-label="Zvětšená mapa světa s checkpointy"></canvas><ol id="checkpointList" class="checkpoint-list"></ol><p class="map-note">Mapa a checkpointy slouží pouze tvému přehledu. AI řídí podle obrazu z kamery a čidel.</p></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./static/simulator.js"></script>
+</body>
+</html>

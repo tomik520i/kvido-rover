@@ -1,0 +1,8 @@
+# Optional image-based motion estimate for isolated simulator experiments.
+# No firmware, model endpoint or production server dependency changes.
+-r requirements.txt
+numpy==2.4.6
+opencv-python-headless==5.0.0.93
+# Offline camera depth probe (tools/camera_depth_probe.py); model file is
+# downloaded separately into data/models/, see docs/KAMERA_HLOUBKA.md.
+onnxruntime==1.31.0

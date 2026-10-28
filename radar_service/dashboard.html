@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kvído radar</title>
+<style>
+:root{--bg:#0f1410;--panel:#172019;--line:#2a372b;--text:#e8eddf;--muted:#9aa892;--accent:#d0ed8a;--warn:#f2b45c;--bad:#ef6b5b;--ok:#7fd88f;--sonar:#ffffff;--radar:#ffcf5a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--line)}
+h1{font-size:20px;margin:0}h1 small{color:var(--muted);font-weight:400;font-size:13px;margin-left:6px}
+h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+main{display:grid;gap:14px;padding:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));max-width:1400px;margin:0 auto}
+section{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
+.wide{grid-column:1/-1}
+.chip{border-radius:999px;padding:4px 10px;font-size:13px;background:#243024;border:1px solid var(--line)}
+.chip.ok{color:var(--ok)}.chip.bad{color:var(--bad)}.chip.warn{color:var(--warn)}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0}dt{color:var(--muted)}dd{margin:0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.frame{display:grid;gap:12px;grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+@media (max-width:760px){.frame{grid-template-columns:1fr}}
+.imgbox{position:relative;aspect-ratio:4/3;background:#000;border-radius:8px;overflow:hidden}
+.imgbox img,.imgbox svg{position:absolute;inset:0;width:100%;height:100%}
+svg text{fill:var(--muted);font-size:11px}
+.legend{display:flex;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:12px;margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:500}
+.muted{color:var(--muted)}.note{color:var(--muted);font-size:12px;margin-top:8px}
+.maphead{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px}.maphead h2{margin:0}
+.btns{display:flex;gap:6px}.btns button{background:#243024;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font:inherit;cursor:pointer;min-width:34px}
+.btns button:hover{border-color:var(--accent)}
+#map{width:100%;aspect-ratio:1/1;max-height:70vh;display:block;background:#0b100c;border-radius:8px;touch-action:none}
+#thoughts{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kvído · radar a statistiky <small>alpha, jen čtení</small></h1>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><span id="car" class="chip">auto ?</span><span id="svc" class="chip">služba ?</span><span id="age" class="chip">snímek ?</span></div>
+</header>
+<main>
+  <section class="wide">
+    <h2>Poslední snímek a kamerový radar</h2>
+    <div class="frame">
+      <div class="imgbox"><img id="img" alt="Poslední snímek kamery auta"><svg id="overlay" viewBox="0 0 640 480" preserveAspectRatio="none"></svg></div>
+      <svg id="polar" viewBox="0 0 320 200" aria-label="Radar"></svg>
+    </div>
+    <div class="legend"><span><i style="background:#ffcf5a"></i>překážka</span><span><i style="background:#f2b45c"></i>mimo kalibraci</span><span><i style="background:#7fd88f"></i>volno dál</span><span><i style="background:#ef6b5b"></i>těsně / bez podlahy</span><span><i style="background:#fff"></i>ultrazvuk</span></div>
+    <p class="note">Body = odhad kontaktu překážky s podlahou. Používá je alfa v kokpitu spolu s ultrazvukem. Mapa pomáhá vybrat cestu; každý další pohyb stále potřebuje aktuální měření. Tato stránka auto neovládá.</p>
+    <p class="note" id="scanRetry" aria-live="polite">Opakované snímání: zatím bez pokusu.</p>
+  </section>
+  <section class="wide">
+    <div class="maphead"><h2>Mapa běhu alfy (pohled shora)</h2><div class="btns"><button id="zoomOut" aria-label="Oddálit">−</button><button id="zoomFit">Celá</button><button id="zoomIn" aria-label="Přiblížit">+</button></div></div>
+    <canvas id="map" aria-label="Mapa"></canvas>
+    <div class="legend"><span><i style="background:#3a5236"></i>volno</span><span><i style="background:#e8eddf"></i>překážka</span><span><i style="background:#6f8f4e"></i>kudy jel</span><span><i style="background:#ef6b5b"></i>neprůjezdné (práh, uvíznutí)</span><span><i style="background:#ffcf5a"></i>cíl</span><span><i style="background:#7fd88f"></i>kolečko: průchod</span></div>
+    <p class="note" id="mapInfo">Zatím žádná mapa. Vznikne při jízdě alfy.</p>
+    <dl id="mapDiagnostics" aria-label="Shoda měření s mapou a výběr cesty"></dl>
+    <ol id="thoughts"></ol>
+  </section>
+  <section class="wide" id="searchMemory"><h2>Paměť prohlédnutých míst</h2>
+    <p class="note">Pravděpodobné oblasti podle obrazu. „Cíl nepozorován“ platí jen pro uložené výhledy, ne pro celou místnost. Staré pozorování nezaručuje dnešní stav.</p>
+    <div id="memoryGoal" class="muted"></div><div id="memoryAreas">Zatím žádné uložené rozhlédnutí.</div>
+  </section>
+  <section><h2>Auto</h2><dl id="carInfo"></dl></section>
+  <section><h2>Spojení</h2><dl id="link"></dl></section>
+  <section><h2>Radarová služba</h2><dl id="service"></dl></section>
+  <section class="wide"><h2>Vzdálenost vpředu: ultrazvuk × radar (cm)</h2><svg id="distChart" viewBox="0 0 800 200" style="width:100%;height:auto"></svg></section>
+  <section><h2>Signál Wi-Fi (dBm)</h2><svg id="rssiChart" viewBox="0 0 400 160" style="width:100%;height:auto"></svg></section>
+  <section><h2>Výpadky spojení se serverem</h2><table><thead><tr><th>Čas</th><th>Důvod</th><th>Kód</th></tr></thead><tbody id="drops"></tbody></table></section>
+  <section class="wide"><h2>Jak se AI rozhoduje</h2><div id="goal" class="muted"></div><table><thead><tr><th>Krok</th><th>Akce</th><th>Důvod</th><th>Ověření po kroku</th></tr></thead><tbody id="decisions"></tbody></table></section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const colour=d=>d.status==='near'?'#ef6b5b':d.status==='open'?'#7fd88f':d.extrapolated?'#f2b45c':'#ffcf5a';
+const fmt=(v,u='')=>v==null?'—':v+u;
+const dl=(el,rows)=>{el.innerHTML=rows.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')};
+let frameAt=null;
+function polar(r,sonar){
+  const cx=160,cy=192,R=180,max=160,svg=[];
+  for(const m of [50,100,150]){const rr=R*m/max;svg.push(`<path d="M${cx-rr},${cy} A${rr},${rr} 0 0 1 ${cx+rr},${cy}" fill="none" stroke="#2a372b"/><text x="${cx+rr-24}" y="${cy-3}">${m/100} m</text>`)}
+  for(const d of (r?.directions||[])){const a=(90+d.bearing_deg)*Math.PI/180;const dist=d.status==='near'?15:d.distance_cm;if(dist==null)continue;
+    const rr=R*Math.min(dist,max)/max;svg.push(`<line x1="${cx}" y1="${cy}" x2="${(cx+rr*Math.cos(a)).toFixed(1)}" y2="${(cy-rr*Math.sin(a)).toFixed(1)}" stroke="${colour(d)}" stroke-width="3" stroke-linecap="round"/>`)}
+  if(sonar!=null){const rr=R*Math.min(sonar,max)/max;svg.push(`<circle cx="${cx}" cy="${cy-rr}" r="6" fill="none" stroke="#fff" stroke-width="2"/>`)}
+  $('polar').innerHTML=svg.join('')||'<text x="10" y="20">Bez radaru</text>';
+}
+function chart(el,w,h,series,lo,hi){
+  const pad=28,svg=[`<line x1="${pad}" y1="${h-pad}" x2="${w}" y2="${h-pad}" stroke="#2a372b"/>`];
+  for(let i=0;i<=4;i++){const v=lo+(hi-lo)*i/4,y=h-pad-(h-2*pad)*i/4;svg.push(`<text x="0" y="${y+4}">${Math.round(v)}</text><line x1="${pad}" y1="${y}" x2="${w}" y2="${y}" stroke="#1f2a20"/>`)}
+  const n=Math.max(...series.map(s=>s.values.length),2);
+  for(const s of series){let d='';s.values.forEach((v,i)=>{if(v==null){d+=' ';return}const x=pad+(w-pad)*i/(n-1),y=h-pad-(h-2*pad)*(Math.min(Math.max(v,lo),hi)-lo)/(hi-lo);d+=(d.endsWith(' ')||!d?'M':'L')+x.toFixed(1)+','+y.toFixed(1)});
+    svg.push(`<path d="${d.replace(/ /g,'')}" fill="none" stroke="${s.colour}" stroke-width="2"/><text x="${w-70}" y="${14+16*series.indexOf(s)}" style="fill:${s.colour}">${esc(s.name)}</text>`)}
+  el.innerHTML=svg.join('');
+}
+// Top-down map: start heading points up; x = forward from the start, y = to the left (cm).
+let mapData=null,mapKey='',zoom=1;
+function drawMap(){
+  const c=$('map'),m=mapData,dpr=window.devicePixelRatio||1,W=c.clientWidth,H=c.clientHeight;
+  c.width=W*dpr;c.height=H*dpr;const g=c.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,W,H);
+  if(!m){g.fillStyle='#9aa892';g.font='13px system-ui';g.fillText('Zatím žádná mapa',12,22);return}
+  const cell=m.cell_cm,[i0,j0]=m.origin,[ni,nj]=m.shape,cells=Uint8Array.from(atob(m.cells),ch=>ch.charCodeAt(0));
+  const xs=[i0*cell,(i0+ni)*cell,...m.trail.map(p=>p[0])],ys=[j0*cell,(j0+nj)*cell,...m.trail.map(p=>p[1])];
+  const minx=Math.min(...xs),maxx=Math.max(...xs),miny=Math.min(...ys),maxy=Math.max(...ys);
+  const scale=Math.min(W/Math.max(maxy-miny,100),H/Math.max(maxx-minx,100))*.92*zoom;
+  const fx=zoom>1?m.pose[0]:(minx+maxx)/2,fy=zoom>1?m.pose[1]:(miny+maxy)/2;
+  const sx=y=>W/2-(y-fy)*scale,sy=x=>H/2-(x-fx)*scale;
+  const colours=[null,'#3a5236','#e8eddf','#6f8f4e','#ef6b5b'];
+  for(let i=0;i<ni;i++)for(let j=0;j<nj;j++){const v=cells[i*nj+j];if(!v)continue;
+    const x=(i0+i)*cell,y=(j0+j)*cell;g.fillStyle=colours[v];g.fillRect(sx(y+cell/2),sy(x+cell/2),cell*scale+.5,cell*scale+.5)}
+  g.strokeStyle='rgba(154,168,146,.12)';g.lineWidth=1;
+  for(let x=Math.floor(minx/50)*50;x<=maxx;x+=50){g.beginPath();g.moveTo(0,sy(x));g.lineTo(W,sy(x));g.stroke()}
+  for(let y=Math.floor(miny/50)*50;y<=maxy;y+=50){g.beginPath();g.moveTo(sx(y),0);g.lineTo(sx(y),H);g.stroke()}
+  const dir=(h,len)=>[-Math.sin(h*Math.PI/180)*len,-Math.cos(h*Math.PI/180)*len];
+  const last=m.panoramas[m.panoramas.length-1];
+  if(last){for(const [h,free,passage,target,blocked] of last.rays){const [dx,dy]=dir(h,free*scale);
+      g.strokeStyle=target?'#ffcf5a':blocked?'#ef6b5b':passage?'#7fd88f':'rgba(208,237,138,.35)';g.lineWidth=2;
+      g.beginPath();g.moveTo(sx(last.y),sy(last.x));g.lineTo(sx(last.y)+dx,sy(last.x)+dy);g.stroke()}
+    if(last.chosen!=null){const [dx,dy]=dir(last.chosen,60*scale);g.strokeStyle='#d0ed8a';g.lineWidth=4;g.setLineDash([6,4]);
+      g.beginPath();g.moveTo(sx(last.y),sy(last.x));g.lineTo(sx(last.y)+dx,sy(last.x)+dy);g.stroke();g.setLineDash([])}}
+  g.strokeStyle='#d0ed8a';g.lineWidth=2;g.beginPath();m.trail.forEach(([x,y],k)=>k?g.lineTo(sx(y),sy(x)):g.moveTo(sx(y),sy(x)));g.stroke();
+  g.fillStyle='#9aa892';g.beginPath();g.arc(sx(0),sy(0),4,0,7);g.fill();
+  g.font='bold 15px system-ui';g.textAlign='center';g.textBaseline='middle';
+  for(const e of m.events){const d=e.distance_cm||0,[dx,dy]=dir(e.heading,d*scale),X=sx(e.y)+dx,Y=sy(e.x)+dy;
+    if(e.kind==='stuck'||e.kind==='threshold'){g.fillStyle='#ef6b5b';g.fillText('✕',X,Y)}
+    else if(e.kind==='target'){g.fillStyle='#ffcf5a';g.fillText('★',sx(e.y),sy(e.x))}}
+  const [px,py,ph]=m.pose,X=sx(py),Y=sy(px),a=-ph*Math.PI/180;
+  g.save();g.translate(X,Y);g.rotate(a);g.fillStyle='#ffffff';g.strokeStyle='#0f1410';g.lineWidth=2;
+  g.beginPath();g.moveTo(0,-12);g.lineTo(8,9);g.lineTo(0,5);g.lineTo(-8,9);g.closePath();g.fill();g.stroke();g.restore();
+  g.fillStyle='#9aa892';g.font='12px system-ui';g.textAlign='left';g.textBaseline='alphabetic';g.fillText('mřížka 50 cm · nahoru = směr startu',10,H-10);
+}
+function showMap(m){
+  const key=m?`${m.run}:${m.steps}:${m.trail.length}:${m.events.length}`:'';if(key===mapKey)return;mapKey=key;mapData=m;drawMap();
+  $('mapInfo').textContent=m?`Běh ${m.run.slice(0,6)} · ${m.steps} pozorování · ujeto ~${Math.round(m.trail.reduce((s,p,k,a)=>k?s+Math.hypot(p[0]-a[k-1][0],p[1]-a[k-1][1]):0,0))} cm · `+
+    `neprůjezdných míst ${m.events.filter(e=>e.kind==='stuck'||e.kind==='threshold').length}. Odhad z vykonaných pulzů s místní korekcí podle dřívějšího radaru. Staré části mapy se globálně nepřepočítávají.`:'Zatím žádná mapa. Vznikne při jízdě alfy.';
+  const l=m?.localization,c=l?.correction,n=m?.navigation;
+  const reasons={no_scan_yet:'zatím bez měření',insufficient_obstacles:'málo překážek pro porovnání',limited_scan_extent:'příliš úzký nebo blízký výsek',straight_wall_ambiguity:'rovná stěna neurčuje polohu jednoznačně',insufficient_prior_map:'chybí starší mapa',low_overlap:'malá shoda se starší mapou',correction_at_search_limit:'oprava by byla příliš velká',competing_modes_or_weak_constraint:'více podobně dobrých poloh',insufficient_improvement:'oprava by shodu dostatečně nezlepšila',local_prior_map_match:'jednoznačná místní shoda'};
+  dl($('mapDiagnostics'),m?[
+    ['Porovnání s mapou',l?(l.status==='aligned'?'Přijato':'Bez korekce')+' · '+(reasons[l.reason]||l.reason):'starší záznam bez diagnostiky'],
+    ['Poslední korekce',c?`${c.dx_cm} / ${c.dy_cm} cm · ${c.dheading_deg}°`:'—'],
+    ['Nejistota odhadu',l?.position_uncertainty_cm!=null?`~${l.position_uncertainty_cm} cm / ${l.heading_uncertainty_deg}° (orientační)`:'—'],
+    ['Vliv mapy na směr',n?.reason||'aktuální senzory / mapa zatím neposkytla vodítko'],
+    ['Navržený směr vůči autu',n?.bearing_deg!=null?`${n.bearing_deg}° (+ vlevo)`:'—']
+  ]:[]);
+  $('thoughts').innerHTML=(m?.panoramas||[]).filter(p=>p.thought).slice(-5).reverse().map(p=>`<li>krok ${esc(p.step)}: ${esc(p.thought)}</li>`).join('');
+}
+$('zoomIn').onclick=()=>{zoom=Math.min(zoom*1.5,8);drawMap()};$('zoomOut').onclick=()=>{zoom=Math.max(zoom/1.5,.5);drawMap()};$('zoomFit').onclick=()=>{zoom=1;drawMap()};
+addEventListener('resize',()=>drawMap());
+async function refresh(){
+  let data;try{data=await (await fetch('state.json',{cache:'no-store'})).json()}catch(e){$('svc').textContent='služba nedostupná';$('svc').className='chip bad';return}
+  const s=data.state,h=data.history,last=h[h.length-1]||{},withRadar=[...h].reverse().find(x=>x.radar);
+  const retry=s.radar_retry||data.map?.radar_retry||withRadar?.radar_retry;
+  if(retry){const labels={capturing:'Pořizuji radar',accepted:'Radar zpracován',unresolved:'Radar zůstává nejistý',aborted:'Snímání přerušeno'};
+    const reasons={low_overlap:'malá shoda s mapou',weak_match_confidence:'slabá shoda s mapou',floor_not_detected:'podlaha nebyla rozpoznána',unknown_scan:'neznámý prostor',duplicate_frame:'opakovaný stejný snímek',no_valid_frame:'bez použitelného snímku',car_state_changed:'stav auta se změnil'};
+    $('scanRetry').textContent=`${labels[retry.status]||retry.status} · pokus ${retry.attempt}/${retry.limit}`+(retry.reason?` · ${reasons[retry.reason]||retry.reason}`:'')+(retry.status==='unresolved'?' · nejistá shoda se do mapy nevynucuje.':'');}
+  showMap(data.map);
+  const journal=data.search_memory;
+  $('memoryGoal').textContent=journal?`Hledání: ${journal.goal}`:'Paměť se naplní při rozhlédnutí alfy.';
+  $('memoryAreas').innerHTML=(journal?.areas||[]).slice().reverse().map(a=>`<article style="border-top:1px solid var(--line);padding:12px 0">
+    <strong>${esc(a.label)}</strong> <span class="muted">${esc(a.id)} · odhad ${esc(a.label_confidence)} · ${esc(a.panoramas)} rozhlédnutí</span>
+    <div>${esc((a.landmarks||[]).join(' · '))}</div>
+    <div>${a.result==='possibly_visible'?'Možný cíl v obraze':'Cíl v uložených výhledech nepozorován'} · ${esc(a.checked_views?.length||0)} výhledů · viditelnost ${esc({clear:'dobrá',partial:'částečná',poor:'slabá'}[a.visibility]||'neurčená')}</div>
+    <div>Zbývá / neprohlédnuto: ${esc((a.uninspected||[]).join('; ')||'Rozsah zbytku místnosti není známý.')}</div>
+    ${a.memory_note?`<div>Pamatuji si: ${esc(a.memory_note)}</div>`:''}
+    ${a.next_search_area?`<div>Další místo k prohlédnutí: ${esc(a.next_search_area)}</div>`:''}
+    <div class="note">${new Date(a.last_seen*1000).toLocaleString('cs-CZ')} · ${a.association==='two_visual_views'?'Návrat odhadnut ze dvou obrazových referencí.':'Nová oblast nebo nejistá shoda.'} Celá místnost není potvrzeně prohledaná.</div>
+    ${a.last_plan?`<div class="note">Poslední plán (není důkaz dojetí): ${esc(a.last_plan.reason)}</div>`:''}
+  </article>`).join('')||'Zatím žádné uložené rozhlédnutí.';
+  $('car').textContent=last.connected?'auto online':'auto offline';$('car').className='chip '+(last.connected?'ok':'bad');
+  $('svc').textContent={running:'služba běží',retrying:'opakuji…',waiting_for_car:'čekám na auto',starting:'startuji'}[s.service]||s.service;
+  $('svc').className='chip '+(s.service==='running'?'ok':'warn');
+  if(s.ai_pending_since){$('svc').textContent=`čekám na AI · ${Math.round(s.now-s.ai_pending_since)} s`; $('svc').className='chip warn'}
+  const age=s.latest_frame_at?Math.round(s.now-s.latest_frame_at):null;$('age').textContent=age==null?'žádný snímek':`snímek před ${age} s`;$('age').className='chip '+(age!=null&&age<15?'ok':'warn');
+  if(withRadar&&s.latest_frame_at!==frameAt){frameAt=s.latest_frame_at;$('img').src='latest.jpg?t='+frameAt;
+    $('overlay').innerHTML=withRadar.radar.directions.filter(d=>d.row!=null).map(d=>`<circle cx="${d.x}" cy="${d.row}" r="6" fill="${colour(d)}"/>`).join('');
+    polar(withRadar.radar,withRadar.sonar_cm)}
+  dl($('carInfo'),[['Ultrazvuk',fmt(last.sonar_cm,' cm')],['Radar vpředu',fmt(withRadar?.radar?.ahead_cm,' cm')],['Náklon kamery',fmt(last.servo,'°')],['Řízení',last.armed?'převzaté':'uvolněné'],['STOP',last.estop?'aktivní':'ne'],['Režim',fmt(last.mode)],['Firmware ESP',fmt(last.firmware)]]);
+  dl($('link'),[['Signál',fmt(last.rssi,' dBm')],['Vysílač (BSSID)',fmt(last.wifi_bssid)],['Přepnutí vysílače',fmt(last.wifi_roam_count)],['ESP běží',last.uptime_ms!=null?Math.round(last.uptime_ms/60000)+' min':'—'],['Spojení / odpojení',last.relay?`${last.relay.connections} / ${last.relay.disconnects}`:'—'],['Stáří telemetrie',fmt(last.telemetry_age_ms,' ms')]]);
+  dl($('service'),[['Stav',s.service],['Snímků',s.frames],['Chyb',s.errors],['Výpočet',fmt(withRadar?.inference_ms,' ms')],['Další pokus za',s.backoff_s?s.backoff_s+' s':'—'],['Poslední chyba',s.last_error||'—'],['Kalibrované náklony',s.calibrated_tilts.join(', ')+'°']]);
+  chart($('distChart'),800,200,[{name:'ultrazvuk',colour:'#ffffff',values:h.map(x=>x.sonar_cm)},{name:'radar',colour:'#ffcf5a',values:h.map(x=>x.radar?.ahead_cm??null)}],0,300);
+  chart($('rssiChart'),400,160,[{name:'RSSI',colour:'#d0ed8a',values:h.map(x=>x.rssi||null)}],-90,-30);
+  $('drops').innerHTML=[...s.relay_events].reverse().slice(0,12).map(e=>`<tr><td>${new Date(e.at_ms).toLocaleTimeString('cs-CZ')}</td><td>${esc(e.reason)}</td><td>${esc(e.close_code)}</td></tr>`).join('')||'<tr><td colspan="3" class="muted">Zatím žádné</td></tr>';
+  const steps=new Map();for(const x of h){const t=x.task;if(t&&t.step!=null&&t.action)steps.set(`${t.id}:${t.step}`,t)}
+  const t=last.task||{};$('goal').textContent=t.goal?`Úkol: ${t.goal} · stav ${t.status}`:'Žádný úkol';
+  $('decisions').innerHTML=[...steps.values()].reverse().slice(0,15).map(t=>`<tr><td>${esc(t.step)}</td><td>${esc(t.action)}</td><td>${esc(t.reason||t.say)}</td><td>${esc(t.assessment)} <span class="muted">${esc(t.progress||'')}</span></td></tr>`).join('')||'<tr><td colspan="4" class="muted">Zatím žádné kroky AI během sledování</td></tr>';
+}
+refresh();setInterval(refresh,2000);
+</script>
+</body>
+</html>
