@@ -1,7 +1,22 @@
 # Stav projektu — 28. října 2026
 
-Tento dokument rozlišuje implementaci od prokázaných výsledků. Vychází ze
-zdrojů a pracovních záznamů do 26. října; publikace proběhla 28. října.
+Tento dokument rozlišuje implementaci od prokázaných výsledků.
+
+## Nový výsledek: večerní test 28. října
+
+Novější pracovní instalace dokončila hledání chromované psí misky:
+závěrečný úsek má 68 pozorování a končí `target_reached`, `completed`,
+`armed=false` a motory na nule. Předcházel mu úsek s operátorskou
+pauzou na opravu promptu. [Podrobný záznam, limity a ukázky promptů](evidence/2026-10-28-bowl/README.md)
+jsou publikované bez fotografií interiéru a soukromých přístupů.
+
+Přibylo také ověřené [zapojení hlasu: OmniVoice TTS a faster-whisper STT](HLAS.md).
+Tato aktualizace je dokumentační. Zdrojový snapshot `cccf363` nebyl
+synchronizován s nasazenými opravami dorovnávání směru a vnímání.
+
+**Následující soupis popisuje původní veřejný snapshot**, připravený
+z podkladů do 26. října a zveřejněný 28. října. Jeho starší výsledky
+a výsledky testovací sady se nesmějí zaměňovat s novým živým testem.
 
 ## Co máme
 
@@ -20,7 +35,7 @@ zdrojů a pracovních záznamů do 26. října; publikace proběhla 28. října.
 - Simulátor a automatické testy velké části rozhodování, transportu a UI.
 - Diagnostika ESP, oddělování síťových úloh a adaptivní FPS/rozlišení kamery.
 
-## Co se podařilo v posledních živých pokusech
+## Historické živé pokusy před novým večerním testem
 
 Auto provádělo motorové impulzy a panoramatický rozhled. Při jednom běhu
 nasbíralo 13 různých snímků rozhledu; ověření směru vyžádalo další natočení

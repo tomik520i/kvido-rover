@@ -7,9 +7,11 @@ v hledání bez nového příkazu po každém pohybu.
 
 **Stav: experimentální alfa, veřejný vývojový snapshot z 28. 10. 2026.**
 Máme vlastní firmware obou desek, webový kokpit, simulátor, serverové řízení,
-kamerové mapování a paměť míst. Spolehlivá navigace po bytě a dokončené
-autonomní nalezení misky zatím prokázané nejsou. Poslední fyzický test byl
-ukončen operátorem; zveřejnění tohoto repozitáře žádný další test nespouští.
+kamerové mapování a paměť míst. **Večerní živý test 28. 10. skončil nalezením
+chromované psí misky a automatickým zastavením.** [Průběh, log a prompty](docs/evidence/2026-10-28-bowl/README.md)
+popisují také předchozí pauzu na opravu a zbývající chyby. Jeden úspěch ještě
+neprokazuje spolehlivou navigaci po bytě. Test běžel na novější pracovní
+verzi; tato aktualizace dokumentace nepřenáší její kód do veřejného snapshotu.
 
 ## Co je uvnitř
 
@@ -21,6 +23,7 @@ ukončen operátorem; zveřejnění tohoto repozitáře žádný další test ne
 | Kamerový radar | Depth Anything V2 Small + geometrie podlahy, lokální mapa a návrhy dalšího směru. |
 | Gemma / OpenAI | Rozpoznání scény a cíle; hlavní kokpit má volbu poskytovatele, radarová alfa používá Gemmu. |
 | Telefon / prohlížeč | Obraz, joystick, textové zadání, mikrofon pro STT a přehrávání TTS. |
+| Hlas přes Verity | OmniVoice TTS v režimu clone; Whisper large-v3-turbo přes faster-whisper pro STT. |
 | Simulátor | Virtuální byt, kamera, kolize, telemetrie a pokusy s navigací bez fyzického auta. |
 
 ```mermaid
@@ -73,6 +76,8 @@ ke Gemmě a volba OpenAI v kokpitu ji nepřepíná.
 - [Aktuální stav, ověření a další práce](docs/STATUS.md)
 - [Architektura, rozhodování a paměť](docs/ARCHITEKTURA.md)
 - [Instalace, konfigurace, radar, hlas a provoz](docs/PROVOZ.md)
+- [Konkrétní TTS/STT a cesta hlasu](docs/HLAS.md)
+- [Živý dojezd k misce: záznam a prompty](docs/evidence/2026-10-28-bowl/README.md)
 - [Firmware a postup nahrávání](docs/NAHRANI_FIRMWARU.md)
 - [Soukromé údaje a bezpečné přispívání](SECURITY.md)
 - [Externí součásti a licence](THIRD_PARTY.md)

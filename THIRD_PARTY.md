@@ -15,6 +15,11 @@ Repozitář neobsahuje ZIP balíky výrobce, modelové váhy ani privátní Veri
   modelová karta a zvlášť stahovaný `onnx/model.onnx`.
 - Gemma a zvolený server inference se pořizují samostatně; dodržuj podmínky
   konkrétního modelu. Totéž platí pro OpenAI a hlasovou službu.
+- [OmniVoice](https://github.com/k2-fsa/OmniVoice): současné TTS přes
+  samostatnou službu Verity. Váhy a hlasová reference nejsou přiloženy.
+- [faster-whisper](https://github.com/SYSTRAN/faster-whisper) / CTranslate2:
+  současné STT s modelem large-v3-turbo; [modelová karta převodu](https://huggingface.co/dropbox-dash/faster-whisper-large-v3-turbo).
+  Konkrétní zapojení a rozsah ověření popisuje [dokumentace hlasu](docs/HLAS.md).
 
 Licence pro vlastní kód Kvída zatím nebyla určena. Samotné zveřejnění na
 GitHubu nepřiděluje projektu MIT/Apache licenci ani nemění licence

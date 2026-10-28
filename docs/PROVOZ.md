@@ -56,6 +56,9 @@ omez přístup na backend, který by jinak obcházel proxy.
 
 ## Hlas
 
+Aktuální instalace používá **OmniVoice TTS** (clone, čeština) a
+**Whisper large-v3-turbo přes faster-whisper / CTranslate2** pro STT.
+Podrobnosti, ověřené nastavení a tok audia jsou v [HLAS.md](HLAS.md).
 STT a TTS jsou proxy na samostatnou službu kompatibilní s Verity:
 
 - `POST /api/stt`: WAV tělo, volitelně query `live=1` a `final=1`, odpověď JSON.

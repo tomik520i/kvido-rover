@@ -1,0 +1,3109 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "physical_rover_observation_export",
+  "goal": "Najdi stříbrnou chromovanou psí misku na podlaze a zastav před ní.",
+  "scope": "Later deployed working version; not a test of the older public source snapshot.",
+  "intervention": "Operator paused earlier segment A at step 53 for a perception prompt fix; then resumed the same mission as segment B with step numbering reset. A step-54 observation also exists outside this selected earlier excerpt.",
+  "image_policy": "Original JPEGs remain private. Hashes were verified locally; published hashes alone do not prove scene contents.",
+  "field_notes": {
+    "frame_received_elapsed_s": "Relative HTTP receipt time for a fresh JPEG, not firmware exposure time; each segment has its own zero.",
+    "executed_before_frame": "Reported motor commands before this observation; not independently measured physical displacement.",
+    "proposed_actions": "Plan after this observation, not proof of execution. Compare the next executed_before_frame.",
+    "action_tuple": "[PWM, count, action]; executed non-default turn may be [PWM, 1, action, duration_ms]. Default pulse 300 ms.",
+    "perception_after_guards": "Parsed model perception after code guards. model_navigation_view/navigation_override retain an override when available; not a raw HTTP response.",
+    "planner_reason": "Application decision summary, sometimes incorporating model route rationale; not hidden reasoning and not necessarily verbatim model text.",
+    "sonar_cm": "Front ultrasonic reading; null means unknown. It may measure a different surface from the visible target."
+  },
+  "segment_a_selected_steps": [
+    {
+      "step": 13,
+      "frame_received_elapsed_s": 62.384,
+      "frame_sha256": "a95010e215c13f5e9d800f4a5284a7eb329db46681ca494ca0fe11f3e9e44f28",
+      "perception_elapsed_ms": 1850,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 101,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, continuous wooden floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [
+        [
+          180,
+          4,
+          "rotate_left"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlédl jsem se a přemýšlím: Miska byla vidět v kuchyni, musím se podívat hlouběji do toho průchodu v pohledu 9. Natáčím se o +128° (119 cm volna).",
+      "outcome": null
+    },
+    {
+      "step": 14,
+      "frame_received_elapsed_s": 74.036,
+      "frame_sha256": "676ebcc883207d88e59ae15966b0044ff507b969913ba2552cda15bb838afe16",
+      "perception_elapsed_ms": 2104,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_left"
+        ],
+        [
+          180,
+          1,
+          "rotate_left"
+        ],
+        [
+          180,
+          1,
+          "rotate_left"
+        ],
+        [
+          180,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "sonar_cm": 143,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, unobstructed floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": true,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected; doorway to another room is visible ahead."
+      },
+      "proposed_actions": [
+        [
+          130,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "proposed_turn_duration_ms": 173,
+      "heading_verification": {
+        "status": "match",
+        "confidence": "high",
+        "correction": "none",
+        "reason": "The landmarks, including the dishwasher and doorway, are identical in both images, indicating the heading is the same.",
+        "latency_ms": 1016,
+        "error_type": null,
+        "geometry": {
+          "reliable": true,
+          "yaw_deg": -8.29,
+          "correction_deg": 8.29,
+          "reason": "shared_features",
+          "sizes": [
+            [
+              640,
+              480
+            ],
+            [
+              640,
+              480
+            ]
+          ],
+          "matches": 107,
+          "inliers": 99,
+          "inlier_ratio": 0.925,
+          "median_error_deg": 0.169,
+          "coverage": [
+            0.723,
+            0.759
+          ],
+          "pitch_deg": 0.09,
+          "roll_deg": 0.12,
+          "optical_yaw_deg": -8.29
+        }
+      },
+      "planner_reason": "Podle obrazu chybí otočit +8.3°. Dorovnám 173 ms a znovu porovnám stejný cílový pohled.",
+      "outcome": null
+    },
+    {
+      "step": 15,
+      "frame_received_elapsed_s": 82.474,
+      "frame_sha256": "95b4005fe383cb1df11b38e7e1ed204886ec6b3da76f51f361bc714c50fe568a",
+      "perception_elapsed_ms": 2070,
+      "executed_before_frame": [
+        [
+          130,
+          1,
+          "rotate_left",
+          173
+        ]
+      ],
+      "sonar_cm": 254,
+      "perception_after_guards": {
+        "obstacle_note": "The floor area in the lower center is clear, showing a continuous wooden surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": true,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected; doorway in background appears to be an open passage."
+      },
+      "proposed_actions": [
+        [
+          180,
+          7,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": {
+        "status": "match",
+        "confidence": "high",
+        "correction": "none",
+        "reason": "The landmarks, including the dishwasher and doorway, are identical in both images, indicating the heading has not changed.",
+        "latency_ms": 1006,
+        "error_type": null,
+        "geometry": {
+          "reliable": true,
+          "yaw_deg": -4.56,
+          "correction_deg": 4.56,
+          "reason": "shared_features",
+          "sizes": [
+            [
+              640,
+              480
+            ],
+            [
+              640,
+              480
+            ]
+          ],
+          "matches": 133,
+          "inliers": 131,
+          "inlier_ratio": 0.985,
+          "median_error_deg": 0.131,
+          "coverage": [
+            0.853,
+            0.771
+          ],
+          "pitch_deg": -0.13,
+          "roll_deg": 0.16,
+          "optical_yaw_deg": -4.56
+        }
+      },
+      "planner_reason": "Směr ověřen porovnáním snímků. Cíl nevidím; vpředu volno 110 cm, jedu 7× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 16,
+      "frame_received_elapsed_s": 91.515,
+      "frame_sha256": "e186b470614df79d834fd86421d75b8f800df3ab0470e5ebf9c26448e145d1ca",
+      "perception_elapsed_ms": 1899,
+      "executed_before_frame": [
+        [
+          180,
+          3,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 245,
+      "perception_after_guards": {
+        "obstacle_note": "The floor in the lower center is clear, showing a continuous wooden surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": true,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl visible; doorway to another room is visible in the background."
+      },
+      "proposed_actions": [
+        [
+          180,
+          7,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl nevidím; vpředu volno 113 cm, jedu 7× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 38,
+      "frame_received_elapsed_s": 303.559,
+      "frame_sha256": "d6b553a5a1a40ba6d2c56540285ce8e764fc0964f9cb7c62dcdfe058d3f727aa",
+      "perception_elapsed_ms": 1805,
+      "executed_before_frame": [
+        [
+          180,
+          2,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 65,
+      "perception_after_guards": {
+        "obstacle_note": "The lower centre shows a clear, unobstructed floor strip extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": true,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected; path to doorway is clear."
+      },
+      "proposed_actions": [
+        [
+          180,
+          2,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl nevidím; vpředu volno 57 cm, jedu 2× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 53,
+      "frame_received_elapsed_s": 396.518,
+      "frame_sha256": "1d6ffd6214d2063f4d58841e60f0508d5241ec872b988b82c230e68589e6181f",
+      "perception_elapsed_ms": 2039,
+      "executed_before_frame": [],
+      "sonar_cm": 198,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, unobstructed wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": true,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "A person is standing in the middle ground, but no silver chrome dog bowl is visible."
+      },
+      "proposed_actions": [],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Něco živého blízko (A person is standing in the middle ground, but no silver chrome dog bowl is visible.); stojím a sleduju, jestli odejde.",
+      "outcome": null
+    }
+  ],
+  "closed_door_replay": {
+    "source_segment": "A",
+    "source_step": 38,
+    "kind": "same saved frame, new prompt, no motor command",
+    "perception_after_guards": {
+      "obstacle_note": "The lower center shows a clear floor strip leading towards a closed wooden door.",
+      "navigation_view": "clear",
+      "obstacle_ahead": false,
+      "target_visible": false,
+      "target_x": null,
+      "target_floor_y": null,
+      "confidence": "low",
+      "animal_or_person_close": false,
+      "path_ahead_clear": true,
+      "passage_visible": false,
+      "threshold_ahead": false,
+      "threshold_floor_y": null,
+      "note": "No target visible; floor is clear in the immediate foreground."
+    }
+  },
+  "segment_b_steps": [
+    {
+      "step": 1,
+      "frame_received_elapsed_s": 0.0,
+      "frame_sha256": "2d233afee247b03d4a43a32a58e8653054461faaaa9dcc66372cef73205927ea",
+      "perception_elapsed_ms": 1960,
+      "executed_before_frame": [],
+      "sonar_cm": 198,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (1 snímků, 0° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 2,
+      "frame_received_elapsed_s": 6.383,
+      "frame_sha256": "4c51850630fb8cdca1b6ab28b74eeaa25f17ec30e08262fafefc9ea059b4986e",
+      "perception_elapsed_ms": 1923,
+      "executed_before_frame": [],
+      "sonar_cm": 197,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, continuous floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Předchozí otočení nepotvrzeno; znovu zkusím krátké otočení bez přidání snímku panoramatu.",
+      "outcome": null
+    },
+    {
+      "step": 3,
+      "frame_received_elapsed_s": 12.123,
+      "frame_sha256": "8c1f488d3459bbb7ac54faaab3ec8f1cfd09867716a00c96c79cf6e4b7be0d25",
+      "perception_elapsed_ms": 1916,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 186,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, unobstructed floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the field of view."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (2 snímků, 33° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 4,
+      "frame_received_elapsed_s": 17.361,
+      "frame_sha256": "ba2ec8eb882ca4b29b7938b65f3ad186d58cd0ffdba66b6c834c67398e6f257a",
+      "perception_elapsed_ms": 1865,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 184,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, unobstructed floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; floor is clear for a short step."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (3 snímků, 66° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 5,
+      "frame_received_elapsed_s": 21.843,
+      "frame_sha256": "dfe4dc10e55ae16c71394fb99dd2dbe4b3dd744d917afed9d3c5e3f65055e059",
+      "perception_elapsed_ms": 2054,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 14,
+      "perception_after_guards": {
+        "obstacle_note": "A wooden cabinet or wall surface fills the entire lower center and extends upwards, blocking the view of the floor.",
+        "navigation_view": "obstructed",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "The view is dominated by a close-up wooden surface, preventing a clear view of the floor ahead."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (4 snímků, 96° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 6,
+      "frame_received_elapsed_s": 27.292,
+      "frame_sha256": "6e6c5209df484066b8f33425d098087c4642b315584813b337f6c117967f8683",
+      "perception_elapsed_ms": 1829,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 14,
+      "perception_after_guards": {
+        "obstacle_note": "The view is entirely occupied by a vertical wooden surface/cabinet base.",
+        "navigation_view": "obstructed",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; immediate foreground is a solid wooden surface."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (5 snímků, 126° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 7,
+      "frame_received_elapsed_s": 31.638,
+      "frame_sha256": "df46f5f545ad96ad45e4f8fa22f2cfcf6ccdf5e379b66e3f305cb69fbfa6a174",
+      "perception_elapsed_ms": 1997,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 73,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a solid wooden surface/wall extending across the frame.",
+        "navigation_view": "obstructed",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; path is blocked by a solid vertical surface/wall."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (6 snímků, 156° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 8,
+      "frame_received_elapsed_s": 36.69,
+      "frame_sha256": "9aa9b0a7eebde70daf99946d56348d4736418bacef05c18f733bb435728ee8fd",
+      "perception_elapsed_ms": 2018,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 50,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of floor leading towards a closed wooden door.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; path is clear of immediate obstacles but ends at a closed door."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (7 snímků, 186° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 9,
+      "frame_received_elapsed_s": 41.693,
+      "frame_sha256": "a1dde9e466d2d82994db8effb48f721534a516bf0f73d5fb0497754d18c34b76",
+      "perception_elapsed_ms": 2081,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 56,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a dark, solid surface, likely a baseboard or the bottom of a cabinet, which fills the immediate forward area.",
+        "navigation_view": "obstructed",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; immediate foreground is blocked by a dark vertical surface/baseboard."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (8 snímků, 216° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 10,
+      "frame_received_elapsed_s": 46.763,
+      "frame_sha256": "c4ec88d345c85ab3468674a69432026aaf96adae196c433e40dff77eb0cacb94",
+      "perception_elapsed_ms": 2163,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 5,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center is occupied by a solid, bright, featureless surface, likely a wall or large appliance, preventing a view of the floor.",
+        "navigation_view": "obstructed",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; immediate foreground is a solid surface."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (9 snímků, 246° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 11,
+      "frame_received_elapsed_s": 51.711,
+      "frame_sha256": "7b346b444a53b886bd7240797c0319e0c8b850585efdcf398f3b3a52eeef65e1",
+      "perception_elapsed_ms": 2070,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 5,
+      "perception_after_guards": {
+        "obstacle_note": "The image is a featureless, bright glare/overexposure; no floor surface or objects are distinguishable.",
+        "navigation_view": "unreadable",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "Extreme overexposure/glare prevents identification of floor or objects.",
+        "model_navigation_view": "unreadable",
+        "navigation_override": "No resolvable image structure; free floor cannot be verified."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (10 snímků, 276° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 12,
+      "frame_received_elapsed_s": 56.718,
+      "frame_sha256": "16a049555ba85e38c3a6cd7ded0ac17997d25b2cf230728f5e4eb52c0f7d3418",
+      "perception_elapsed_ms": 2020,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 314,
+      "perception_after_guards": {
+        "obstacle_note": "The view is entirely obscured by a large, solid, light-colored vertical surface (likely a wall or appliance) filling the entire frame.",
+        "navigation_view": "unreadable",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; immediate foreground is blocked by a solid surface.",
+        "model_navigation_view": "obstructed",
+        "navigation_override": "No resolvable image structure; free floor cannot be verified."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (11 snímků, 306° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 13,
+      "frame_received_elapsed_s": 61.659,
+      "frame_sha256": "5251103f9618eaf04faec8965c94024b5232d6123c5c85e40084fb973f033450",
+      "perception_elapsed_ms": 2010,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": null,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of floor extending forward towards a dark area with furniture.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (12 snímků, 336° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 14,
+      "frame_received_elapsed_s": 66.744,
+      "frame_sha256": "1d625c0c88df6febdc83f554b0e6094799bcbf7ffa82009d945615408bd4317d",
+      "perception_elapsed_ms": 1944,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 198,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, unobstructed floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlédl jsem se a přemýšlím: Miska byla vidět v kuchyni, musím se podívat pod tu linku v pohledu 13. Natáčím se o +0° (110 cm volna).",
+      "outcome": null
+    },
+    {
+      "step": 15,
+      "frame_received_elapsed_s": 74.457,
+      "frame_sha256": "a64e9e9bd1ff647d244baf81cda8a2222815a60bfcc959b52d37132ec46a6f67",
+      "perception_elapsed_ms": 1956,
+      "executed_before_frame": [],
+      "sonar_cm": 197,
+      "perception_after_guards": {
+        "obstacle_note": "the floor surface extends forward from the bottom center",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "no target visible"
+      },
+      "proposed_actions": [
+        [
+          180,
+          7,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": {
+        "status": "match",
+        "confidence": "high",
+        "correction": "none",
+        "reason": "Both images show the same view of the room, including the window and furniture, indicating the heading is identical.",
+        "latency_ms": 1029,
+        "error_type": null,
+        "geometry": {
+          "reliable": true,
+          "yaw_deg": 0.02,
+          "correction_deg": -0.02,
+          "reason": "shared_features",
+          "sizes": [
+            [
+              640,
+              480
+            ],
+            [
+              640,
+              480
+            ]
+          ],
+          "matches": 235,
+          "inliers": 235,
+          "inlier_ratio": 1.0,
+          "median_error_deg": 0.066,
+          "coverage": [
+            0.927,
+            0.682
+          ],
+          "pitch_deg": -0.01,
+          "roll_deg": 0.01,
+          "optical_yaw_deg": 0.01
+        }
+      },
+      "planner_reason": "Směr ověřen porovnáním snímků. Cíl nevidím; vpředu volno 113 cm, jedu 7× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 16,
+      "frame_received_elapsed_s": 84.652,
+      "frame_sha256": "8bf53d51cf1cbe10ceae71ee2ac4767592ea3dd26acdd766f71250516118ee64",
+      "perception_elapsed_ms": 1936,
+      "executed_before_frame": [
+        [
+          180,
+          7,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 143,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, unobstructed floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [
+        [
+          180,
+          7,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl nevidím; vpředu volno 113 cm, jedu 7× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 17,
+      "frame_received_elapsed_s": 94.371,
+      "frame_sha256": "c3281d3e87a3cb84700a866c8138a89aa78e1623afe091e06b072ed0f9990af3",
+      "perception_elapsed_ms": 2001,
+      "executed_before_frame": [
+        [
+          180,
+          7,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 86,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected; floor is visible in the immediate foreground."
+      },
+      "proposed_actions": [
+        [
+          180,
+          4,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl nevidím; vpředu volno 85 cm, jedu 4× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 18,
+      "frame_received_elapsed_s": 102.605,
+      "frame_sha256": "834ec83c3d4413bf7eee158bd225da47bf312db4877bc19df9467716edf0420b",
+      "perception_elapsed_ms": 2035,
+      "executed_before_frame": [
+        [
+          180,
+          4,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 59,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, unobstructed floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible in the dim image."
+      },
+      "proposed_actions": [
+        [
+          180,
+          2,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl nevidím; vpředu volno 59 cm, jedu 2× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 19,
+      "frame_received_elapsed_s": 110.222,
+      "frame_sha256": "6a443fc1d22d64fc3113cbd9929313719772e6d66bf6f92617ff7dd8e0ffab9a",
+      "perception_elapsed_ms": 2151,
+      "executed_before_frame": [
+        [
+          180,
+          2,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 98,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a dark, shadowed floor area with no immediate obstruction, but the view is very dim.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible in the dim lighting."
+      },
+      "proposed_actions": [
+        [
+          180,
+          3,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl nevidím; vpředu volno 72 cm, jedu 3× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 20,
+      "frame_received_elapsed_s": 118.356,
+      "frame_sha256": "f4a5c2a79a0be6f9985edefa0958c6c9bea44325d4cb7f843e1425d726ca4f0b",
+      "perception_elapsed_ms": 2063,
+      "executed_before_frame": [
+        [
+          180,
+          3,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 89,
+      "perception_after_guards": {
+        "obstacle_note": "the image is obscured by a large, blurry, light-colored object in the immediate foreground, likely a leg or part of a person/animal",
+        "navigation_view": "obstructed",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": true,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "foreground object blocks the view of the floor"
+      },
+      "proposed_actions": [],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Něco živého blízko (foreground object blocks the view of the floor); stojím a sleduju, jestli odejde.",
+      "outcome": null
+    },
+    {
+      "step": 21,
+      "frame_received_elapsed_s": 124.832,
+      "frame_sha256": "87dee5b5a36f6a358700774646cd16956b177124b0c6c40cbb915e612028bd24",
+      "perception_elapsed_ms": 2111,
+      "executed_before_frame": [],
+      "sonar_cm": 88,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center is obscured by a large, blurry, out-of-focus object, likely a leg or part of a piece of furniture, preventing a clear view of the floor strip.",
+        "navigation_view": "obstructed",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "Large blurry object in immediate foreground blocks the view of the floor path."
+      },
+      "proposed_actions": [],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Nevím kudy dál; skloním kameru, posvítím si pod sebe a podívám se zblízka.",
+      "outcome": null
+    },
+    {
+      "step": 22,
+      "frame_received_elapsed_s": 132.495,
+      "frame_sha256": "3277a7756a2f7703d1e53b90c8e7f8fad4969098ede429896f9c61f5cadf10fc",
+      "perception_elapsed_ms": 2065,
+      "executed_before_frame": [],
+      "sonar_cm": 88,
+      "perception_after_guards": {
+        "obstacle_note": "the floor area in the lower center is dark and featureless, appearing to be a close-up of the robot's own underside or a shadow, making it unreadable.",
+        "navigation_view": "unreadable",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "no target visible; image is too dark and close to the robot to determine floor path."
+      },
+      "proposed_actions": [
+        [
+          150,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Vpředu jen 0 cm a nikde volno; pootočím se o kousek vpravo.",
+      "outcome": null
+    },
+    {
+      "step": 23,
+      "frame_received_elapsed_s": 140.055,
+      "frame_sha256": "4e29f7f5842c6803b84bcf21c566597c28f9a3fe9110b5051d5d81826755177b",
+      "perception_elapsed_ms": 2179,
+      "executed_before_frame": [],
+      "sonar_cm": 88,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center is occupied by a large, blurry, out-of-focus object, likely a part of the robot or a very close object, obscuring the floor.",
+        "navigation_view": "obstructed",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "The view is dominated by a large, blurry foreground object preventing a clear view of the floor ahead."
+      },
+      "proposed_actions": [
+        [
+          150,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Vpředu jen 0 cm a nikde volno; pootočím se o kousek vpravo.",
+      "outcome": null
+    },
+    {
+      "step": 24,
+      "frame_received_elapsed_s": 147.887,
+      "frame_sha256": "d41ddfbbe152b6a357cef99fcf59da285a1f2ea08213a0b8def554bc3484534f",
+      "perception_elapsed_ms": 2117,
+      "executed_before_frame": [
+        [
+          150,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": null,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center of the image shows a dark, shadowed floor area with no immediate obstruction, but the lighting is very dim.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the dim lighting."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Vpředu jen 0 cm; nejvíc volna 150 cm na -28°.",
+      "outcome": null
+    },
+    {
+      "step": 25,
+      "frame_received_elapsed_s": 155.449,
+      "frame_sha256": "a0a0dc296c963343e6d1576189710b8cb45d93e5adbb2d48e9ddf2f2783a3a45",
+      "perception_elapsed_ms": 2117,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 224,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": true,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (1 snímků, 0° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 26,
+      "frame_received_elapsed_s": 163.103,
+      "frame_sha256": "3ac180ae501a93a8cde124fbe71857a69e7ba000b99423f30ffa91a6f2265499",
+      "perception_elapsed_ms": 1846,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 82,
+      "perception_after_guards": {
+        "obstacle_note": "the floor is visible and clear in the lower center",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "no target detected"
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (2 snímků, 33° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 27,
+      "frame_received_elapsed_s": 167.605,
+      "frame_sha256": "04f56b1038a3435b34d6aeb2ea003036ea5852966d464c1a2760212342762503",
+      "perception_elapsed_ms": 1862,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 227,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, unobstructed floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; floor is clear for a short step."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (3 snímků, 71° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 28,
+      "frame_received_elapsed_s": 172.083,
+      "frame_sha256": "3555d7e0302c49b5aab8580192cd5046ae6ca52d7a5d0c9ceac7a7f1157237af",
+      "perception_elapsed_ms": 1959,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 228,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the field of view."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (4 snímků, 104° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 29,
+      "frame_received_elapsed_s": 177.222,
+      "frame_sha256": "7d0640922b03bd89c84a71c270a646c5b5a95569de31f3b35fa2882a20b35d8b",
+      "perception_elapsed_ms": 1942,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 118,
+      "perception_after_guards": {
+        "obstacle_note": "the floor is visible in the lower center, extending towards a doorway/opening",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": true,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "no target visible; floor leads to an open doorway"
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (5 snímků, 139° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 30,
+      "frame_received_elapsed_s": 182.315,
+      "frame_sha256": "3b69be40df2d514ed682896a75ce40020dcfa0a898bdf10ad89542df71c59e57",
+      "perception_elapsed_ms": 1982,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 117,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward toward a dark doorway.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; floor is clear in front of the dark doorway."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (6 snímků, 173° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 31,
+      "frame_received_elapsed_s": 187.439,
+      "frame_sha256": "8eb17e09964f0b8c20b033d83e299c94a3a85fafc834eaebc02748025421b117",
+      "perception_elapsed_ms": 2066,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 150,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear wooden floor surface extending forward toward a dark doorway.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected; floor is clear in the immediate foreground."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (7 snímků, 206° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 32,
+      "frame_received_elapsed_s": 192.598,
+      "frame_sha256": "6da264511c0c2178e4de8cda4ea109b1b711cd247a8aa6c4ab66a548fe40ba11",
+      "perception_elapsed_ms": 1987,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 157,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, unobstructed floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected; floor is clear for a short step."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (8 snímků, 241° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 33,
+      "frame_received_elapsed_s": 197.653,
+      "frame_sha256": "cbe7355fb2302ac5a1bbffdfb58b31222e0766ff4c1b6a4c0bbe851323f6c032",
+      "perception_elapsed_ms": 1916,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 24,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; floor appears clear for a short step."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (9 snímků, 275° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 34,
+      "frame_received_elapsed_s": 202.695,
+      "frame_sha256": "6c879344d902e0b2ab408c9d47a25018065b868eb04da19a69c53608ea87e3ba",
+      "perception_elapsed_ms": 1988,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 93,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center is occupied by a dark, textured object (likely furniture) that blocks the immediate floor strip.",
+        "navigation_view": "obstructed",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; immediate foreground is blocked by an object."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (10 snímků, 309° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 35,
+      "frame_received_elapsed_s": 207.827,
+      "frame_sha256": "62d260d5505bac4dcd5bd679cdeb9dba2166cc77964e992856e927fad68d7072",
+      "perception_elapsed_ms": 1911,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 43,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a dark, shadowed floor area with no immediate obstruction visible in the immediate foreground.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the dim lighting."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (11 snímků, 343° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 36,
+      "frame_received_elapsed_s": 212.949,
+      "frame_sha256": "8dc652efc6dcfb85d3cc3892fcbe8470750eae871379c5c83368e6d70d565fe8",
+      "perception_elapsed_ms": 1940,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 224,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": true,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [
+        [
+          150,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlédl jsem se: nejlepší je průchod vlevo (150 cm volna), natáčím se o +17°.",
+      "outcome": null
+    },
+    {
+      "step": 37,
+      "frame_received_elapsed_s": 221.907,
+      "frame_sha256": "f6902e39d7beae8f4288cc185eebaec342e3be2639a3de53885a47266be81f13",
+      "perception_elapsed_ms": 2147,
+      "executed_before_frame": [
+        [
+          150,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "sonar_cm": 136,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center area shows a dark, shadowed floor surface with no immediate obstruction, but the path ahead is obscured by deep shadows.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [
+        [
+          130,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Dokončuji vybranou otočku (-11°); směr potom ověřím podle uloženého snímku.",
+      "outcome": null
+    },
+    {
+      "step": 38,
+      "frame_received_elapsed_s": 229.578,
+      "frame_sha256": "44a20829664ddebeca1ec018f85460764561de6efce5039dd6d01134a6ed2656",
+      "perception_elapsed_ms": 1920,
+      "executed_before_frame": [
+        [
+          130,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 228,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [
+        [
+          150,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 280,
+      "heading_verification": {
+        "status": "match",
+        "confidence": "high",
+        "correction": "none",
+        "reason": "Both images show the same hallway and tall cabinet, indicating the robot is facing the same direction.",
+        "latency_ms": 1117,
+        "error_type": null,
+        "geometry": {
+          "reliable": true,
+          "yaw_deg": 25.64,
+          "correction_deg": -25.64,
+          "reason": "shared_features",
+          "sizes": [
+            [
+              640,
+              480
+            ],
+            [
+              640,
+              480
+            ]
+          ],
+          "matches": 57,
+          "inliers": 57,
+          "inlier_ratio": 1.0,
+          "median_error_deg": 0.431,
+          "coverage": [
+            0.453,
+            0.572
+          ],
+          "pitch_deg": -0.21,
+          "roll_deg": -1.75,
+          "optical_yaw_deg": 25.58
+        }
+      },
+      "planner_reason": "Podle obrazu chybí otočit -25.6°. Dorovnám 280 ms a znovu porovnám stejný cílový pohled.",
+      "outcome": null
+    },
+    {
+      "step": 39,
+      "frame_received_elapsed_s": 238.352,
+      "frame_sha256": "5f4669f0b12f55001125efb053d857bf675d57e1e45be6227c44ce01631c2c2f",
+      "perception_elapsed_ms": 2006,
+      "executed_before_frame": [
+        [
+          150,
+          1,
+          "rotate_right",
+          280
+        ]
+      ],
+      "sonar_cm": 225,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [
+        [
+          180,
+          8,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": {
+        "status": "match",
+        "confidence": "high",
+        "correction": "none",
+        "reason": "Both images show the same hallway, furniture, and doorway, indicating the robot is facing the same direction.",
+        "latency_ms": 1115,
+        "error_type": null,
+        "geometry": {
+          "reliable": true,
+          "yaw_deg": 2.32,
+          "correction_deg": -2.32,
+          "reason": "shared_features",
+          "sizes": [
+            [
+              640,
+              480
+            ],
+            [
+              640,
+              480
+            ]
+          ],
+          "matches": 109,
+          "inliers": 95,
+          "inlier_ratio": 0.872,
+          "median_error_deg": 0.487,
+          "coverage": [
+            0.819,
+            0.691
+          ],
+          "pitch_deg": -0.24,
+          "roll_deg": 0.15,
+          "optical_yaw_deg": 2.3
+        }
+      },
+      "planner_reason": "Směr ověřen porovnáním snímků. Cíl nevidím; vpředu volno 150 cm, jedu 8× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 40,
+      "frame_received_elapsed_s": 249.834,
+      "frame_sha256": "af496d0d258989f787df7b58b3ed1feadbb267b81154faab6954e30ad1fd30c0",
+      "perception_elapsed_ms": 1931,
+      "executed_before_frame": [
+        [
+          180,
+          8,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 158,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the visible area."
+      },
+      "proposed_actions": [
+        [
+          180,
+          8,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl nevidím; vpředu volno 122 cm, jedu 8× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 41,
+      "frame_received_elapsed_s": 259.056,
+      "frame_sha256": "95deb610e346af1259bf37f1416423e28cc70929811bf53761812350d79d98ca",
+      "perception_elapsed_ms": 2013,
+      "executed_before_frame": [
+        [
+          180,
+          3,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 138,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": true,
+        "target_x": 0.1,
+        "target_floor_y": 0.58,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "A silver bowl is partially visible on the far left edge of the frame."
+      },
+      "proposed_actions": [
+        [
+          180,
+          6,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl nevidím; vpředu volno 96 cm, jedu 6× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 42,
+      "frame_received_elapsed_s": 268.151,
+      "frame_sha256": "a14bc814a8c624a4c2c144acd6a68dccdb6269ee9e50dfc7ee12c586e9ecff66",
+      "perception_elapsed_ms": 1926,
+      "executed_before_frame": [
+        [
+          180,
+          6,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 90,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, continuous wooden floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; floor is clear for a short step."
+      },
+      "proposed_actions": [
+        [
+          180,
+          4,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl nevidím; vpředu volno 85 cm, jedu 4× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 43,
+      "frame_received_elapsed_s": 276.486,
+      "frame_sha256": "4f8f37f40bac1fa921ac2db4c93c98fb83c98db6a73bb4a4e05c95502a7e785a",
+      "perception_elapsed_ms": 2089,
+      "executed_before_frame": [
+        [
+          180,
+          4,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 66,
+      "perception_after_guards": {
+        "obstacle_note": "The floor in the lower center is visible and clear, extending forward towards a dark area.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the frame."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl nevidím; vpředu volno 50 cm, jedu 1× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 44,
+      "frame_received_elapsed_s": 284.119,
+      "frame_sha256": "d1d3da169fbb3a3d81ad692dc3ec7c8f3c9f878ac9c45b0c6edb31838a7e03db",
+      "perception_elapsed_ms": 1850,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 94,
+      "perception_after_guards": {
+        "obstacle_note": "the floor continues forward from the bottom center",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "no target visible in the dim lighting"
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl nevidím; vpředu volno 50 cm, jedu 1× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 45,
+      "frame_received_elapsed_s": 291.184,
+      "frame_sha256": "8787d4e53a9dbc80fcb09f9bc0db611a5e161cce1e36e8b99df4a94e5f6c9ea0",
+      "perception_elapsed_ms": 1962,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 87,
+      "perception_after_guards": {
+        "obstacle_note": "The floor surface is visible and clear in the lower center, extending forward towards the base of the robot.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the field of view."
+      },
+      "proposed_actions": [
+        [
+          130,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Vpředu jen 43 cm; nejvíc volna 141 cm na +12°.",
+      "outcome": null
+    },
+    {
+      "step": 46,
+      "frame_received_elapsed_s": 298.265,
+      "frame_sha256": "83170e20f26758783411111c193507fa0d2c1b72e6519ec1b66f15bdcf5e0bd4",
+      "perception_elapsed_ms": 2614,
+      "executed_before_frame": [
+        [
+          130,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "sonar_cm": null,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward toward the base of a white appliance.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected; floor is visible in front of the appliance."
+      },
+      "proposed_actions": [],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Nevím kudy dál; skloním kameru, posvítím si pod sebe a podívám se zblízka.",
+      "outcome": null
+    },
+    {
+      "step": 47,
+      "frame_received_elapsed_s": 306.476,
+      "frame_sha256": "264e3c488761247636415d2a28798ad526862a8a5007b839cc6a65b3bd34b51e",
+      "perception_elapsed_ms": 1889,
+      "executed_before_frame": [],
+      "sonar_cm": null,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected; floor is clear for a short step."
+      },
+      "proposed_actions": [
+        [
+          150,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Vpředu jen 0 cm a nikde volno; pootočím se o kousek vlevo.",
+      "outcome": null
+    },
+    {
+      "step": 48,
+      "frame_received_elapsed_s": 314.184,
+      "frame_sha256": "d0e1fbc95995d1287248adda8ee5ec3daa77a0cecc9b8dd0753653b03950318d",
+      "perception_elapsed_ms": 1823,
+      "executed_before_frame": [],
+      "sonar_cm": null,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear, unobstructed wooden floor strip extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the field of view."
+      },
+      "proposed_actions": [
+        [
+          150,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Vpředu jen 0 cm a nikde volno; pootočím se o kousek vlevo.",
+      "outcome": null
+    },
+    {
+      "step": 49,
+      "frame_received_elapsed_s": 321.238,
+      "frame_sha256": "4728e0fdd6d9b7a8dab8bade6bb45da5c0f30e88afe67a56e14e5ab499e928a0",
+      "perception_elapsed_ms": 2052,
+      "executed_before_frame": [
+        [
+          150,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "sonar_cm": 144,
+      "perception_after_guards": {
+        "obstacle_note": "the floor is visible in the lower center, extending forward towards a piece of furniture",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": true,
+        "target_x": 0.15,
+        "target_floor_y": 0.58,
+        "confidence": "high",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "silver chrome dog bowl is visible on the floor to the left"
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (1 snímků, 0° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 50,
+      "frame_received_elapsed_s": 328.95,
+      "frame_sha256": "a60908bacec1e74a5e5e5f217292f4ad5b05a44f0365a2ec7e923423703839a8",
+      "perception_elapsed_ms": 2004,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 89,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in the field of view."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (2 snímků, 34° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 51,
+      "frame_received_elapsed_s": 334.044,
+      "frame_sha256": "eebc6571acb76f325d8dfbb824e64b34de925c8657b6b2261c85a0344510e8be",
+      "perception_elapsed_ms": 1940,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 79,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected in view."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (3 snímků, 68° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 52,
+      "frame_received_elapsed_s": 339.036,
+      "frame_sha256": "0a64025c5e673f68f83356af7c56425653221ba28c51cf121e700cce34c48dbc",
+      "perception_elapsed_ms": 2505,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 37,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center is occupied by a solid vertical surface (wall/cabinet) that meets the floor.",
+        "navigation_view": "unreadable",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "The view is dominated by a solid vertical surface directly in front of the robot.",
+        "model_navigation_view": "obstructed",
+        "navigation_override": "No resolvable image structure; free floor cannot be verified."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (4 snímků, 102° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 53,
+      "frame_received_elapsed_s": 344.751,
+      "frame_sha256": "50c6b6e35960271a19844e4848313f025914826f582886aec7b9c98f61723d1a",
+      "perception_elapsed_ms": 1908,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 33,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a continuous, flat floor surface with no immediate obstructions.",
+        "navigation_view": "unreadable",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No silver chrome dog bowl detected; floor appears clear for a short step.",
+        "model_navigation_view": "clear",
+        "navigation_override": "No resolvable image structure; free floor cannot be verified."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (5 snímků, 136° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 54,
+      "frame_received_elapsed_s": 349.788,
+      "frame_sha256": "fd29418f8430f06b13da619f7088c2e0cba7ec5a0fedc245c360d961d7085e95",
+      "perception_elapsed_ms": 2047,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": null,
+      "perception_after_guards": {
+        "obstacle_note": "A solid vertical wooden surface (likely a cabinet or wall) fills the entire view, leaving no visible floor strip in the lower center.",
+        "navigation_view": "obstructed",
+        "obstacle_ahead": true,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "No target visible; view is dominated by a solid wooden surface."
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (6 snímků, 170° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 55,
+      "frame_received_elapsed_s": 354.846,
+      "frame_sha256": "2158239203e00e4fe1ac028c77505dd5f3fe5791d314d74fa347821c5ea69a7b",
+      "perception_elapsed_ms": 1799,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 173,
+      "perception_after_guards": {
+        "obstacle_note": "the floor continues forward into a hallway",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": true,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "no target visible"
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (7 snímků, 204° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 56,
+      "frame_received_elapsed_s": 361.969,
+      "frame_sha256": "6a6e7821444d2b50c3e43c012393e84810f06f3dcb1934d9801886278f7dd9bf",
+      "perception_elapsed_ms": 1998,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 129,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": true,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "A person is standing to the left, but the floor path ahead is clear."
+      },
+      "proposed_actions": [],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Něco živého blízko (A person is standing to the left, but the floor path ahead is clear.); stojím a sleduju, jestli odejde.",
+      "outcome": null
+    },
+    {
+      "step": 57,
+      "frame_received_elapsed_s": 366.367,
+      "frame_sha256": "b73f8546e7dc48f31dc14d80b0ec266d6a675cdd9e5a5f07e91eade5126cc552",
+      "perception_elapsed_ms": 1989,
+      "executed_before_frame": [],
+      "sonar_cm": 128,
+      "perception_after_guards": {
+        "obstacle_note": "the floor continues forward from the bottom centre",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": true,
+        "path_ahead_clear": false,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "a person is standing to the left; no dog bowl visible"
+      },
+      "proposed_actions": [],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Něco živého blízko (a person is standing to the left; no dog bowl visible); stojím a sleduju, jestli odejde.",
+      "outcome": null
+    },
+    {
+      "step": 58,
+      "frame_received_elapsed_s": 370.377,
+      "frame_sha256": "a092f993aedcf9eed7731cb4bfd29b7a2fdfca48cf898af28608350db5cd3436",
+      "perception_elapsed_ms": 1843,
+      "executed_before_frame": [],
+      "sonar_cm": 127,
+      "perception_after_guards": {
+        "obstacle_note": "the floor continues forward from the bottom center",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "no target visible"
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (8 snímků, 238° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 59,
+      "frame_received_elapsed_s": 374.788,
+      "frame_sha256": "aa8c61e70ed8f4c05bf133826c239bb34f8472f22da5ffd2c7efed214398ad65",
+      "perception_elapsed_ms": 2109,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 131,
+      "perception_after_guards": {
+        "obstacle_note": "the floor in the lower center is clear, showing a wooden floor texture extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "no silver chrome dog bowl detected in the frame"
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (9 snímků, 272° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 60,
+      "frame_received_elapsed_s": 379.966,
+      "frame_sha256": "5e8774514179b64498a9075c69d49044df25001adb419b4001ace7a924963a63",
+      "perception_elapsed_ms": 2008,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 87,
+      "perception_after_guards": {
+        "obstacle_note": "the floor is visible in the lower center, extending forward towards a dark object on the left and a chair/wall on the right",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": false,
+        "target_x": null,
+        "target_floor_y": null,
+        "confidence": "low",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "no silver chrome dog bowl detected"
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (10 snímků, 306° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 61,
+      "frame_received_elapsed_s": 385.702,
+      "frame_sha256": "0f9c8be6dcb2b14aa8b970352101ea86217fa7f4a69ca7efd794c34f57f313c6",
+      "perception_elapsed_ms": 1985,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 87,
+      "perception_after_guards": {
+        "obstacle_note": "the floor is visible in the lower center, extending forward towards a silver bowl",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": true,
+        "target_x": 0.64,
+        "target_floor_y": 0.59,
+        "confidence": "high",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "silver chrome dog bowl is visible on the floor to the right"
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlížím se kolem sebe (11 snímků, 341° / 360°).",
+      "outcome": null
+    },
+    {
+      "step": 62,
+      "frame_received_elapsed_s": 390.925,
+      "frame_sha256": "985dbb01b904adba7143c4068c52cef94c7411804c1f4ce0c4e83ce1924dead9",
+      "perception_elapsed_ms": 2001,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "rotate_right"
+        ]
+      ],
+      "sonar_cm": 139,
+      "perception_after_guards": {
+        "obstacle_note": "the floor is visible in the lower center, extending forward slightly before meeting a dark area/shadow on the right.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": true,
+        "target_x": 0.3,
+        "target_floor_y": 0.58,
+        "confidence": "high",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "silver chrome dog bowl is visible on the floor to the left of center"
+      },
+      "proposed_actions": [
+        [
+          130,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Rozhlédl jsem se: nejlepší je cíl vlevo (96 cm volna), natáčím se o +15°.",
+      "outcome": null
+    },
+    {
+      "step": 63,
+      "frame_received_elapsed_s": 399.224,
+      "frame_sha256": "2bebfad7226797fdd21f05301dddba30a88d1224f00208860924a377bc8875c0",
+      "perception_elapsed_ms": 1964,
+      "executed_before_frame": [
+        [
+          130,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "sonar_cm": 161,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": true,
+        "target_x": 0.4,
+        "target_floor_y": 0.59,
+        "confidence": "high",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "silver chrome dog bowl detected on the floor"
+      },
+      "proposed_actions": [
+        [
+          130,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": {
+        "status": "match",
+        "confidence": "high",
+        "correction": "none",
+        "reason": "Both images show the same furniture and floor layout from a similar angle, indicating the heading is the same.",
+        "latency_ms": 1052,
+        "error_type": null,
+        "geometry": {
+          "reliable": false,
+          "yaw_deg": null,
+          "correction_deg": null,
+          "reason": "few_shared_features",
+          "sizes": [
+            [
+              640,
+              480
+            ],
+            [
+              640,
+              480
+            ]
+          ],
+          "matches": 6
+        }
+      },
+      "planner_reason": "Směr ověřen porovnáním snímků. Cíl vidím +11° od středu; natáčím se.",
+      "outcome": null
+    },
+    {
+      "step": 64,
+      "frame_received_elapsed_s": 408.251,
+      "frame_sha256": "f0c86a85d1bbd27c1ac96317f3c0274ba34b37faa2047b27964ae655775ceb7d",
+      "perception_elapsed_ms": 1978,
+      "executed_before_frame": [
+        [
+          130,
+          1,
+          "rotate_left"
+        ]
+      ],
+      "sonar_cm": 161,
+      "perception_after_guards": {
+        "obstacle_note": "the floor area in the lower center is clear, showing a continuous floor surface extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": true,
+        "target_x": 0.54,
+        "target_floor_y": 0.59,
+        "confidence": "high",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "silver chrome dog bowl is visible on the floor in the middle ground"
+      },
+      "proposed_actions": [
+        [
+          180,
+          3,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl přímo vpředu (cíl asi 94 cm), volno 87 cm; jedu 3× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 65,
+      "frame_received_elapsed_s": 416.561,
+      "frame_sha256": "acb62939d80c9c22c9d513ede8fbeeccabb1062d9b9acd3b4c19428eae9e37a7",
+      "perception_elapsed_ms": 1982,
+      "executed_before_frame": [
+        [
+          180,
+          3,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 109,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": true,
+        "target_x": 0.54,
+        "target_floor_y": 0.61,
+        "confidence": "high",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "Silver chrome dog bowl is visible on the floor in the center."
+      },
+      "proposed_actions": [
+        [
+          180,
+          2,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl přímo vpředu (cíl asi 77 cm), volno 69 cm; jedu 2× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 66,
+      "frame_received_elapsed_s": 424.289,
+      "frame_sha256": "5632f8570707a985363fc36b6c70b6eb6ecf51329ab841237adc8300e33cb308",
+      "perception_elapsed_ms": 2024,
+      "executed_before_frame": [
+        [
+          180,
+          2,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 92,
+      "perception_after_guards": {
+        "obstacle_note": "The lower center shows a clear strip of wooden floor extending forward.",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": true,
+        "target_x": 0.55,
+        "target_floor_y": 0.64,
+        "confidence": "high",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "silver chrome dog bowl is visible on the floor in the center-right"
+      },
+      "proposed_actions": [
+        [
+          180,
+          1,
+          "forward"
+        ]
+      ],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl přímo vpředu (cíl asi 61 cm), volno 55 cm; jedu 1× vpřed.",
+      "outcome": null
+    },
+    {
+      "step": 67,
+      "frame_received_elapsed_s": 431.952,
+      "frame_sha256": "b05c6d5e7cd6a1194f080401f012503049b0e25a85aed16e162f88540c1f3ae3",
+      "perception_elapsed_ms": 1957,
+      "executed_before_frame": [
+        [
+          180,
+          1,
+          "forward"
+        ]
+      ],
+      "sonar_cm": 88,
+      "perception_after_guards": {
+        "obstacle_note": "the floor is clear in the lower center",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": true,
+        "target_x": 0.55,
+        "target_floor_y": 0.66,
+        "confidence": "high",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "silver chrome dog bowl is visible on the floor"
+      },
+      "proposed_actions": [],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Vypadá to, že cíl je přede mnou (asi 48 cm); ověřím to ještě jedním pohledem.",
+      "outcome": null
+    },
+    {
+      "step": 68,
+      "frame_received_elapsed_s": 438.327,
+      "frame_sha256": "a57bce9016067b5b203ee74f090b8a1c89d856a2f9c67cbeac39b0c2c2b8e9d5",
+      "perception_elapsed_ms": 1775,
+      "executed_before_frame": [],
+      "sonar_cm": 88,
+      "perception_after_guards": {
+        "obstacle_note": "the floor is visible in the lower center",
+        "navigation_view": "clear",
+        "obstacle_ahead": false,
+        "target_visible": true,
+        "target_x": 0.55,
+        "target_floor_y": 0.67,
+        "confidence": "high",
+        "animal_or_person_close": false,
+        "path_ahead_clear": true,
+        "passage_visible": false,
+        "threshold_ahead": false,
+        "threshold_floor_y": null,
+        "note": "silver chrome dog bowl detected on the floor"
+      },
+      "proposed_actions": [],
+      "proposed_turn_duration_ms": 300,
+      "heading_verification": null,
+      "planner_reason": "Cíl je přímo přede mnou, asi 47 cm. Zastavuji – jsem u cíle.",
+      "outcome": "target_reached"
+    }
+  ],
+  "summary": {
+    "segment_b_observations": 68,
+    "segment_b_distinct_frame_hashes": 68,
+    "segment_b_first_to_last_frame_s": 438.327,
+    "segment_b_median_perception_ms": 1987.5,
+    "status": "completed",
+    "armed": false,
+    "last_action": "stop",
+    "motor_byte": 0,
+    "final_snapshot_sonar_cm": 86,
+    "last_observation_sonar_cm": 88,
+    "target_camera_distance_estimate_cm": 47,
+    "externally_measured_target_distance_cm": null
+  }
+}
